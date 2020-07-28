@@ -1,0 +1,12 @@
+spring:
+  application:
+#    要与configserver中的配置文件名前缀一致
+    name: configclient
+  profiles:
+    active: dev
+  cloud:
+    config:
+#      配置本地的configserver的访问路径
+      uri: http://localhost:8762
+#      设置客户端优先判断configserver获取是否正常
+      fail-fast: true
