@@ -23,6 +23,8 @@
         <module>configclient</module>
         <module>zipkin</module>
         <module>zipkinclient</module>
+        <module>authorizationserver</module>
+        <module>authorizationresouce</module>
     </modules>
 
     <parent>
