@@ -25,6 +25,7 @@
         <module>zipkinclient</module>
         <module>authorizationserver</module>
         <module>authorizationresouce</module>
+        <module>authorizationclient</module>
     </modules>
 
     <parent>

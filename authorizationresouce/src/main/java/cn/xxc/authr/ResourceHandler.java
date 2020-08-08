@@ -2,10 +2,18 @@ package cn.xxc.authr;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.oauth2.provider.authentication.BearerTokenExtractor;
+import org.springframework.security.oauth2.provider.token.ResourceServerTokenServices;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
@@ -45,6 +53,21 @@ public class ResourceHandler {
         map.put("host", DEFAULT_HOST);
         map.put("port", DEFAULT_PORT);
         return map;
+    }
+
+
+    private BearerTokenExtractor bearerTokenExtractor = new BearerTokenExtractor();
+
+    @Autowired
+    private ResourceServerTokenServices tokenServices;
+
+    @RequestMapping("users")
+    public Principal userInfo(HttpServletRequest request) {
+        // 通过BearerTokenExtractor从请求中获取访问令牌
+        Authentication authentication = this.bearerTokenExtractor.extract(request);
+        String token = (String) authentication.getPrincipal();
+        // 使用ResourceTokenServices加载访问令牌对应的OAuth2Authentication信息
+        return this.tokenServices.loadAuthentication(token);
     }
 
     private static final ConcurrentHashMap<String,  CompletableFuture<Integer>> CAHCE = new ConcurrentHashMap<>(128);

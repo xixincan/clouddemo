@@ -1,0 +1,29 @@
+server:
+  port: 8888
+  servlet:
+    context-path: /client
+spring:
+  application:
+    name: authorizationclient1
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+
+security:
+  oauth2:
+    client:
+      client-id: client
+      client-secret: secret
+      access-token-uri: http://127.0.0.1:8766/oauth/token
+      user-authorization-uri: http://127.0.0.1:8766/oauth/authorize
+      client-authentication-scheme: form
+    resource:
+      user-info-uri: http://127.0.0.1:8767/users
+      prefer-token-info: false
+      #      认证授权中心上验证token
+#      token-info-uri: http://127.0.0.1:8766/oauth/check_token
+#      jwt:
+#        key-uri: http://127.0.0.1:8766/oauth/token_key

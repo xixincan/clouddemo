@@ -10,6 +10,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.error.OAuth2AccessDeniedHandler;
+import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.RemoteTokenServices;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
@@ -41,8 +42,7 @@ public class ResourceConfig extends ResourceServerConfigurerAdapter {
 
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
-        resources.tokenStore(new JwtTokenStore(accessTokenConverter()))
-                .stateless(true);
+        resources.tokenStore(jwtTokenStore()).stateless(true);
         // 配置RemoteTokenServices， 用于想AuthorizationServer验证令牌
         RemoteTokenServices tokenServices  = new RemoteTokenServices();
         tokenServices.setAccessTokenConverter(accessTokenConverter());
@@ -65,11 +65,28 @@ public class ResourceConfig extends ResourceServerConfigurerAdapter {
     }
 
     @Bean
+    public JwtTokenStore jwtTokenStore() {
+        return new JwtTokenStore(accessTokenConverter());
+    }
+
+    @Bean
     public JwtAccessTokenConverter accessTokenConverter() {
         JwtAccessTokenConverter accessTokenConverter = new JwtAccessTokenConverter();
         accessTokenConverter.setSigningKey("secret");
         return accessTokenConverter;
     }
+    /**
+     * resourceServerTokenServices 类的实例，用来实现令牌服务。
+     * @return
+     */
+    @Bean
+    public DefaultTokenServices tokenServices() {
+        DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
+        defaultTokenServices.setTokenStore(jwtTokenStore());
+        return defaultTokenServices;
+    }
+
+
 
     @Override
     public void configure(HttpSecurity http) throws Exception {

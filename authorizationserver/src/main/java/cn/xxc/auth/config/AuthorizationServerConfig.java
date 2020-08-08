@@ -35,15 +35,19 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Resource
     private AuthenticationManager authenticationManager;
 
+    /**
+     * 配置appId、appKey（secret）、回调地址、token有效期
+     */
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         // 配置一个客户端， 既可以通过授权码类型获取令牌，也可以通过密码类型获取令牌
         clients.inMemory()
-                .withClient("client") // 客户端ID
+                .withClient("client") // 客户端ID/appId
                 .authorizedGrantTypes("authorization_code", "password", "refresh_token")    // 客户端可以使用的授权类型
                 .scopes("all")  // 允许请求的范围
-                .secret("secret")   // 客户端安全码
-                .redirectUris("http://localhost:8888/"); // 回调地址
+                .secret("secret")   // 客户端安全码appKey/secret
+                .autoApprove(true)  // 自动授权
+                .redirectUris("http://127.0.0.1:8888/client/login"); // 回调地址
     }
 
     // 配置AuthorizationServer tokenServices
