@@ -47,7 +47,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .scopes("all")  // 允许请求的范围
                 .secret("secret")   // 客户端安全码appKey/secret
                 .autoApprove(true)  // 自动授权
-                .redirectUris("http://127.0.0.1:8888/client/login"); // 回调地址
+                .redirectUris("http://localhost:8888/login"); // 回调地址
     }
 
     // 配置AuthorizationServer tokenServices
