@@ -1,4 +1,4 @@
-package cn.xxc.con.controller;
+package cn.xxc.controller;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;

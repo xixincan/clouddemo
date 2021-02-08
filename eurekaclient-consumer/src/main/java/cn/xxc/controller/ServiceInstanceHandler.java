@@ -1,4 +1,4 @@
-package cn.xxc.con.controller;
+package cn.xxc.controller;
 
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;

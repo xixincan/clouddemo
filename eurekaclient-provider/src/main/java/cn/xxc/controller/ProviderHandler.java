@@ -1,4 +1,4 @@
-package cn.xxc.clt.controller;
+package cn.xxc.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
