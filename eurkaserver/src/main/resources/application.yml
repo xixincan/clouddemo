@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: peer1
+    active: peer
 ---
 spring:
   profiles: standalone
@@ -22,7 +22,7 @@ eureka:
       defaultZone: http://localhost:${server.port}/eureka/
 ---
 spring:
-  profiles: peer1
+  profiles: peer
   application:
     name: eureka-service
 
@@ -31,30 +31,11 @@ server:
 
 eureka:
   instance:
-    hostname: peer1
+    hostname: www.xxc.com
     instance-id: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
     prefer-ip-address: true
   client:
     register-with-eureka: true
     fetch-registry: true
     service-url:
-      defaultZone: http://localhost:8763/eureka/
----
-spring:
-  profiles: peer2
-  application:
-    name: eureka-service
-
-server:
-  port: 8763
-
-eureka:
-  instance:
-    hostname: peer2
-    instance-id: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
-    prefer-ip-address: true
-  client:
-    register-with-eureka: true
-    fetch-registry: true
-    service-url:
-      defaultZone: http://localhost:8762/eureka/
+      defaultZone: http://www.xxc.com:${server.port}/eureka/
