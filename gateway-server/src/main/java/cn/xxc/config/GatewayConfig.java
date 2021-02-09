@@ -5,6 +5,8 @@ import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.time.ZonedDateTime;
+
 /**
  * Spring Cloud Gateway 支持两种配置方式，一种是在yml中配置
  * 另一种就是JAVA config方式
@@ -27,6 +29,7 @@ public class GatewayConfig {
 //        routes.route("route_to_news", predicateSpec -> predicateSpec.path("/guoji").uri("http://news.baidu.com")).build();
         routes.route("route_to_news",
                 predicateSpec -> predicateSpec.path("/news/**")
+                        .and().after(ZonedDateTime.now())
                         .filters(filterSpec -> filterSpec.stripPrefix(1))
                         .uri("http://news.baidu.com")
         ).build();

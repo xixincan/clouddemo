@@ -8,7 +8,7 @@ spring:
     gateway:
       discovery:
         locator:
-          enabled: true
+          enabled: true # 开启从注册中心动态创建路由的给你，利用服务名可以负载均衡
       routes:
         - id: route_to_provider
 #          uri: http://localhost:8760
