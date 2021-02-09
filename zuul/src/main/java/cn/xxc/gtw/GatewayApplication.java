@@ -12,6 +12,7 @@ import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
  * 2020-07-25
  * @version 1.0.0
  */
+@Deprecated
 @EnableZuulProxy
 @EnableAutoConfiguration
 public class GatewayApplication {

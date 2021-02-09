@@ -11,7 +11,7 @@ import java.util.Collection;
  * 2020-07-28
  * @version 1.0.0
  */
-@FeignClient(value = "provider1", fallback = FeignError.class)
+@FeignClient(value = "eureka-client-provider", fallback = FeignError.class)
 public interface FeignProviderClient {
 
     @GetMapping("provider/find/all")

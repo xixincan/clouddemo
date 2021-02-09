@@ -26,6 +26,7 @@
         <module>authorizationserver</module>
         <module>authorizationresouce</module>
         <module>authorizationclient</module>
+        <module>gateway-server</module>
     </modules>
 
     <parent>
@@ -33,13 +34,6 @@
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.1.7.RELEASE</version>
     </parent>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-    </dependencies>
 
     <dependencyManagement>
         <dependencies>

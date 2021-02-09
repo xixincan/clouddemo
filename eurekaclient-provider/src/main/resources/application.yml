@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: eureka_ha
+    active: eureka_la
   application:
     name: eureka-client-provider
 
