@@ -1,0 +1,40 @@
+server:
+  port: 2001
+
+spring:
+  application:
+    name: seata-order-service
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.1.3:8848
+  datasource:
+    url: jdbc:mysql://192.168.1.3:3306/seata_order?useUnicode=true&characterEncoding=utf8&autoReconnect=true&allowMultiQueries=true&serverTimezone=UTC
+    username: write
+    password: write123
+
+feign:
+  hystrix:
+    enabled: true
+logging:
+  level:
+    root: info
+  file: logs/service.log
+
+seata:
+  tx-service-group: my_test_tx_group
+  enable-auto-data-source-proxy: true
+  registry:
+    type: nacos
+    nacos:
+      server-addr: 192.168.1.3:8848
+#      注册使用默认的public，与服务端保持一致
+#      namespace: 22010bc2-1873-4420-b9bf-61890a442bd4
+      group: SEATA_GROUP
+  config:
+    type: nacos
+    nacos:
+      server-addr: 192.168.1.3:8848
+#      配置使用自定义的seata，与服务端保持一致
+      namespace: 22010bc2-1873-4420-b9bf-61890a442bd4
+      group: SEATA_GROUP

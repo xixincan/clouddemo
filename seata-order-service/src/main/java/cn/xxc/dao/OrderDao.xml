@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xxc.dao.OrderDao">
+
+    <resultMap id="BaseResultMap" type="cn.xxc.domain.Order">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="user_id" jdbcType="BIGINT" property="userId"/>
+        <result column="product_id" jdbcType="BIGINT" property="productId"/>
+        <result column="count" jdbcType="INTEGER" property="count"/>
+        <result column="money" jdbcType="DECIMAL" property="money"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+    </resultMap>
+
+<!--    <insert id="createOrder" parameterType="map" useGeneratedKeys="true">-->
+<!--        insert into t_order (user_id, product_id, count, money, status)-->
+<!--        values(#{userId}, #{productId}, #{count}, #{money}, 0)-->
+<!--    </insert>-->
+
+    <update id="endOrder" parameterType="map">
+        update t_order set status=#{status} where id=#{id} and status=0
+    </update>
+
+</mapper>

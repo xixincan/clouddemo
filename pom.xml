@@ -29,6 +29,9 @@
         <module>gateway-server</module>
         <module>nacosclient-provider</module>
         <module>nacosclient-consumer</module>
+        <module>seata-order-service</module>
+        <module>seata-account-service</module>
+        <module>seata-storage-service</module>
     </modules>
 
     <parent>
